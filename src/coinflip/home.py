@@ -18,7 +18,7 @@ class HomeScreen(toga.Box):
             Press the button on the bottom
             to make one now!
             """,
-            style=Pack(padding=5),
+            style=Pack(padding=5, alignment=CENTER, font_family="WorkSansSemiBold", color="gray"),
         )
 
         add_chest_button = toga.Button(
