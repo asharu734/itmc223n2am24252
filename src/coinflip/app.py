@@ -3,42 +3,30 @@ Hajijuja application
 """
 
 import toga
-from toga.style import Pack
-from toga.style.pack import COLUMN, ROW
-
+from coinflip.home import HomeScreen
+from coinflip.createChest import CreateChestScreen
 
 class CoinFlip(toga.App):
     def startup(self):
-        main_box = toga.Box(style=Pack(direction=COLUMN))
-
-        hamburger_button = toga.Button(
-            "Hamburger",
-            style=Pack(padding=5),
+        toga.Font.register(
+            family="WorkSansSemiBold",
+            path="resources/WorkSansSemiBold.ttf"
         )
-
-        empty_dashboard_message = toga.Label(
-            """
-            No chests  yet :(
-            Press the button on the bottom
-            to make one now!
-            """,
-            style=Pack(padding=5),
-        )
-
-        add_chest_button = toga.Button(
-            "Add chest (+)",
-            style=Pack(padding=5),
-        )
-
-        #main_box elements:
-        main_box.add(hamburger_button)
-        main_box.add(empty_dashboard_message)
-        main_box.add(add_chest_button)
 
         self.main_window = toga.MainWindow(title=self.formal_name)
-        self.main_window.content = main_box
+
+        # Set the starting screen
+        self.home_screen = HomeScreen(self)
+        self.create_chest_screen = CreateChestScreen(self)
+
+        self.main_window.content = self.home_screen
         self.main_window.show()
 
+    def show_create_chest(self):
+        self.main_window.content = self.create_chest_screen
+
+    def show_home(self):
+        self.main_window.content = self.home_screen
 
 def main():
     return CoinFlip()
