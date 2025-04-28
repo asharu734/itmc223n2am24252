@@ -5,6 +5,7 @@ Hajijuja application
 import toga
 from coinflip.home import HomeScreen
 from coinflip.createChest import CreateChestScreen
+from coinflip.menu import MenuScreen
 
 class CoinFlip(toga.App):
     def startup(self):
@@ -18,6 +19,7 @@ class CoinFlip(toga.App):
         # Set the starting screen
         self.home_screen = HomeScreen(self)
         self.create_chest_screen = CreateChestScreen(self)
+        self.menu = MenuScreen(self)
 
         self.main_window.content = self.home_screen
         self.main_window.show()
@@ -28,8 +30,11 @@ class CoinFlip(toga.App):
     def show_home(self):
         self.main_window.content = self.home_screen
 
+    def show_menu(self):
+        self.main_window.content = self.menu
+
 def main():
     return CoinFlip()
 
-#beeware-venv/bin/activate
+#beeware-venv/Script/activate
 #kung di gumana try mo cd ..
