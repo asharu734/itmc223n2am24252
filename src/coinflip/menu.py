@@ -8,7 +8,8 @@ class MenuScreen(toga.Box):
         self.app = app
 
         menu_title = toga.Label(
-            "Main Menu"
+            "Main Menu",
+            style=Pack(padding=5, alignment=CENTER),
         )
 
         home_button = toga.Button(
