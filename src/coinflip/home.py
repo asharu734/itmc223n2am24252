@@ -9,6 +9,7 @@ class HomeScreen(toga.Box):
 
         hamburger_button = toga.Button(
             icon='resources/icons/menu.png',
+            on_press=self.open_menu,
             style=Pack(padding=5),
         )
 
@@ -31,3 +32,6 @@ class HomeScreen(toga.Box):
 
     def open_create_chest(self, widget):
         self.app.show_create_chest()
+
+    def open_menu(self, widget):
+        self.app.show_menu()
