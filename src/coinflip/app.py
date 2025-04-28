@@ -30,3 +30,6 @@ class CoinFlip(toga.App):
 
 def main():
     return CoinFlip()
+
+#beeware-venv/bin/activate
+#kung di gumana try mo cd ..
