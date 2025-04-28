@@ -8,7 +8,7 @@ class HomeScreen(toga.Box):
         self.app = app
 
         hamburger_button = toga.Button(
-            "Hamburger",
+            icon='resources/icons/menu.png',
             style=Pack(padding=5),
         )
 
@@ -18,11 +18,11 @@ class HomeScreen(toga.Box):
             Press the button on the bottom
             to make one now!
             """,
-            style=Pack(padding=5, alignment=CENTER, font_family="WorkSansSemiBold", color="gray"),
+            style=Pack(padding=5, alignment=CENTER, font_family="WorkSansSemiBold", color="orange"),
         )
 
         add_chest_button = toga.Button(
-            "Add chest (+)",
+            icon='resources/icons/add_chest.png',
             on_press=self.open_create_chest,
             style=Pack(padding=5),
         )
