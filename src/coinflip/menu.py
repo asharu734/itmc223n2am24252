@@ -25,3 +25,5 @@ class MenuScreen(toga.Box):
             "Logout",
             style=Pack(padding=5),
         )
+
+        self.add(menu_title, home_button, settings_button, logout_button)
