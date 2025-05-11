@@ -55,12 +55,21 @@ class CreateChestScreen(toga.Box):
         deadlineBox.add(deadlineLabel, self.deadlineInput)
 
         # Color Icons
+        def make_color_handler(color_file):
+            def handler(widget):
+                self.selected_color = color_file
+                print(f"Selected color: {color_file}")
+            return handler
+        
+        self.selected_color = f"resources/Chests/Chest0.png"
+
         colors = []
         for i in range(7):
             icon = toga.Icon(f"resources/Colors/Color{i}.png")
             button = toga.Button(
                 icon=icon, 
-                style=Pack(alignment=CENTER, width=40, height=40, padding=5)
+                on_press=make_color_handler(f"resources/Chests/Chest{i}.png"),
+                style=Pack(alignment=CENTER)
             )
             colors.append(button)
 
@@ -69,12 +78,23 @@ class CreateChestScreen(toga.Box):
             style=Pack(padding=(0, 5), font_family="WorkSansSemiBold")
         )
 
-        colorsBox = toga.Box(style=Pack(direction=ROW, flex=1))
-        for btn in colors:
-            colorsBox.add(btn)
+        # Split colors into two rows
+        first_row = toga.Box(style=Pack(direction=ROW, alignment=CENTER, padding_bottom=5))
+        second_row = toga.Box(style=Pack(direction=ROW, alignment=CENTER))
 
-        chestColorOptionBox = toga.Box(style=Pack(direction=COLUMN, padding=5, alignment=CENTER))
+        # Split the buttons (assumes 7 buttons: 4 on first row, 3 on second row)
+        for idx, btn in enumerate(colors):
+            if idx < 4:
+                first_row.add(btn)
+            else:
+                second_row.add(btn)
+
+        colorsBox = toga.Box(style=Pack(direction=COLUMN, alignment=CENTER))
+        colorsBox.add(first_row, second_row)
+
+        chestColorOptionBox = toga.Box(style=Pack(direction=COLUMN, alignment=CENTER))
         chestColorOptionBox.add(chestColorOptionLabel, colorsBox)
+
 
         # Buttons
         createButton = toga.Button(
@@ -103,8 +123,23 @@ class CreateChestScreen(toga.Box):
         )
 
     def submit(self, widget):
+        name = self.chestNameInput.value
+        amount = self.chestAmountInput.value
+        deadline = self.deadlineInput.value
+
+        # For now, pick the first color or allow selection later
+        chest = {
+            "name": name,
+            "amount": amount,
+            "deadline": deadline,
+            "color": self.selected_color
+        }
+
+        self.app.chests.append(chest)
+
         print(f"Chest '{self.chestNameInput.value}' created with amount ${self.chestAmountInput.value}.")
         self.app.show_home()
+        self.app.home_screen.refresh_chests()
 
     def go_back(self, widget):
         self.app.show_home()
