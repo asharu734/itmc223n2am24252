@@ -8,13 +8,13 @@ class MenuScreen(toga.Box):
         self.app = app
 
         menu_title = toga.Label(
-            "Main Menu",
-            style=Pack(padding=5, alignment=CENTER),
+            "Main Menu"
         )
 
         home_button = toga.Button(
             "Home",
             style=Pack(padding=5),
+            on_press=self.go_back
         )
 
         settings_button = toga.Button(
@@ -28,3 +28,6 @@ class MenuScreen(toga.Box):
         )
 
         self.add(menu_title, home_button, settings_button, logout_button)
+        
+    def go_back(self, widget):
+        self.app.show_home()

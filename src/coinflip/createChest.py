@@ -132,7 +132,8 @@ class CreateChestScreen(toga.Box):
             "name": name,
             "amount": amount,
             "deadline": deadline,
-            "color": self.selected_color
+            "color": self.selected_color,
+            "saved": 0
         }
 
         self.app.chests.append(chest)
