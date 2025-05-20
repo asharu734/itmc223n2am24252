@@ -1,8 +1,10 @@
 import toga
 from toga.style import Pack
-from toga.style.pack import COLUMN
+from toga.style.pack import COLUMN, CENTER
+from toga import ImageView, Image
 import hashlib
 import os
+
 
 RESOURCES_DIR = os.path.join(os.path.dirname(__file__), "resources")
 FILE_PATH = os.path.join(RESOURCES_DIR, "users.txt")
@@ -13,19 +15,25 @@ class LoginScreen(toga.Box):
         self.app = app
         self.switch_to_register = switch_to_register
 
-        self.username_input = toga.TextInput(placeholder='Username')
-        self.password_input = toga.PasswordInput(placeholder='Password')
-        login_button = toga.Button('Login', on_press=self.login, style=Pack(padding_top=10))
-        register_button = toga.Button('Go to Register', on_press=lambda w: self.switch_to_register(), style=Pack(padding_top=10))
-        back_button = toga.Button('Go back', on_press= self.show_login, style=Pack(padding_top=10))
-        self.status_label = toga.Label('', style=Pack(padding_top=10))
+        greet_label = toga.Label(
+            "Welcome back!\nIt’s great seeing\nyou again.", 
+            style=Pack(text_align=CENTER, font_size=25, font_weight = "bold", padding=30)
+        )
 
+        self.username_input = toga.TextInput(placeholder='username', style=Pack(font_size=15, height=40, width=300))
+        self.password_input = toga.PasswordInput(placeholder='password',  style=Pack(font_size=15, height=40, width=300))
+        login_button = toga.Button('Login', on_press=self.login, style=Pack(font_size=17, height=60, width=190, padding_top=10, background_color = "#E3B726", color = "white"))
+        register_button = toga.Button('Sign up here', on_press=lambda w: self.switch_to_register(), style=Pack(font_size=17, height=60, width=190, padding_top=10, background_color = "#E3B726", color = "white"))
+        back_button = toga.Button('Go back', on_press= self.show_login, style=Pack(font_size=17, height=60, width=190, padding_top=10, background_color = "#E3B726", color = "white"))
+        self.status_label = toga.Label('', style=Pack(font_size=12, text_align=CENTER, padding_top=5))
+
+        self.add(greet_label)
         self.add(self.username_input)
         self.add(self.password_input)
+        self.add(self.status_label)
         self.add(login_button)
         self.add(register_button)
         self.add(back_button)
-        self.add(self.status_label)
 
     def login(self, widget):
         username = self.username_input.value.strip()

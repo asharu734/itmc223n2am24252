@@ -28,11 +28,11 @@ class HomeScreen(toga.Box):
         add_chest_container.add(add_chest_button)
         add_chest_container.add(toga.Box(style=Pack(flex=1)))
 
-
         top_bar.add(hamburger_button)
         self.add(top_bar)
         self.refresh_chests()
         self.add(add_chest_container)
+
 
     def refresh_chests(self):
         for child in self.children[1:-1]:

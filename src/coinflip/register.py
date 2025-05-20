@@ -1,6 +1,6 @@
 import toga
 from toga.style import Pack
-from toga.style.pack import COLUMN
+from toga.style.pack import COLUMN, CENTER
 import hashlib
 import os
 
@@ -13,17 +13,23 @@ class RegisterScreen(toga.Box):
         self.app = app
         self.switch_to_login = switch_to_login
 
-        self.username_input = toga.TextInput(placeholder='New Username')
-        self.password_input = toga.PasswordInput(placeholder='New Password')
-        register_button = toga.Button('Register', on_press=self.register, style=Pack(padding_top=10))
-        back_button = toga.Button('Go back', on_press= self.show_login, style=Pack(padding_top=10))
-        self.status_label = toga.Label('', style=Pack(padding_top=10))
+        greet_label = toga.Label(
+            "Only a few more clicks\nand you'll be tracking\nyour savings in no time!", 
+            style=Pack(text_align=CENTER, font_size=25, font_weight = "bold", padding=30)
+        )
 
+        self.username_input = toga.TextInput(placeholder='new username', style=Pack(font_size=15, height=40, width=300))
+        self.password_input = toga.PasswordInput(placeholder='new password', style=Pack(font_size=15, height=40, width=300))
+        register_button = toga.Button('Sign up', on_press=self.register, style=Pack(font_size=17, height=60, width=190, padding_top=10, background_color = "#E3B726", color = "white"))
+        back_button = toga.Button('Go back', on_press= self.show_login, style=Pack(font_size=17, height=60, width=190, padding_top=10, background_color = "#E3B726", color = "white"))
+        self.status_label = toga.Label('', style=Pack(font_size=12, text_align=CENTER, padding_top=5))
+
+        self.add(greet_label)
         self.add(self.username_input)
-        self.add(self.password_input)
+        self.add(self.password_input) 
+        self.add(self.status_label)
         self.add(register_button)
         self.add(back_button)
-        self.add(self.status_label)
 
     def register(self, widget):
         username = self.username_input.value.strip()
